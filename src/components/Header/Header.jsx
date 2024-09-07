@@ -8,6 +8,8 @@ function Header() {
   const navigate = useNavigate()
 
   const navItems = [
+    // when authstatus is true then allposts and addpost is visible but login and signup is not visible under(!authstatus) authentication
+    // is important when user are authenticated then not require to login and signup.
     {
       name: 'Home',
       slug: "/",

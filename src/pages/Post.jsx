@@ -13,7 +13,7 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData ? post.userId !== userData.$id : false;
 
     useEffect(() => {
         if (slug) {
@@ -28,6 +28,8 @@ export default function Post() {
         if (post && post.featuredImage) {
             appwriteService.getFilePreview(post.featuredImage).then((response) => {
                 setImageUrl(response.href);
+                console.log(post.userId)
+                console.log(userData.$id)
             });
         }
     }, [post?.featuredImage]);
@@ -50,7 +52,6 @@ export default function Post() {
                         alt={post.title}
                         className="rounded-xl"
                     />
-
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
